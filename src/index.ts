@@ -3,10 +3,13 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import fs from 'fs';
+import ChiaLogReader from './utils/chiaLogReader';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
+const CHIA_LOGS = process.env.CHIA_LOGS || '/chia-logs';
+
 const app: Express = express();
 
 app.use(helmet());
@@ -35,8 +38,33 @@ app.post('/webhook', (req: Request, res: Response) => {
 
 app.get('/logs/full', (req: Request, res: Response) => {
   try {
-    const logs = fs.readFileSync(`logs/main.log`, 'utf-8');
-    res.send(logs.replace(/['"]+/g, ''));
+    const files = fs.readdirSync(CHIA_LOGS);
+    const fullLogs: any = [];
+
+    files.forEach((path) => {
+      const fullPath = `${CHIA_LOGS}/${path}`;
+      const fileStats = fs.statSync(fullPath);
+      fileStats.size > 200000 ? fullLogs.push(fullPath) : false; // 200,000 is assumed a full log
+    });
+
+    // console.log(files.length);
+    // console.log(fullLogs.length);
+
+    const fileData = fs.readFileSync(fullLogs[fullLogs.length - 1], 'utf-8');
+    console.log(fullLogs[fullLogs.length - 1]);
+
+    const chiaLogReader = new ChiaLogReader(fileData);
+    console.log(chiaLogReader.getTempDirs());
+    console.log(chiaLogReader.getPlotSize());
+    console.log(chiaLogReader.getBufferSize());
+    console.log(chiaLogReader.getBuckets());
+    console.log(chiaLogReader.getThreads());
+    console.log(chiaLogReader.getPhaseStartTime(1));
+    console.log(chiaLogReader.getPhaseStartTime(2));
+    console.log(chiaLogReader.getPhaseStartTime(3));
+    console.log(chiaLogReader.getPhaseStartTime(4));
+
+    res.send();
   } catch (error: any) {
     console.log(error);
     res.sendStatus(500);
