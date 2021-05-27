@@ -1,4 +1,4 @@
-import { text } from "body-parser";
+import moment from 'moment';
 
 export default class ChiaLogReader {
   public data: string;
@@ -8,40 +8,89 @@ export default class ChiaLogReader {
   }
 
   getTempDirs() {
-    const text = this.findText(this.data, /[\n\r].*temporary dirs: \s*([^\n\r]*)/gm);
+    const text = this.findText(this.data, new RegExp('.*Starting plotting progress into temporary dirs: (.*)', 'gm'), 1) as string;
     return text?.split(' and ');
   }
 
   getPlotSize(): any {
-    const text = this.findText(this.data, /[\n\r].*Plot size is: \s*([^\n\r]*)/gm);
+    const text = this.findText(this.data, new RegExp('.*Plot size is: (.*)', 'gm'), 1);
     return text;
   }
 
   getBufferSize(): any {
-    const text = this.findText(this.data, /[\n\r].*Buffer size is: \s*([^\n\r]*)/gm);
+    const text = this.findText(this.data, new RegExp('.*Buffer size is: (.*)', 'gm'), 1);
     return text;
   }
 
   getBuckets(): any {
-    const text = this.findText(this.data, /[\n\r].*Using (.*) buckets([^\n\r]*)/gm);
+    const text = this.findText(this.data, new RegExp('.*Using (.*) buckets.*', 'gm'), 1);
     return text;
   }
 
   getThreads(): any {
-    const text = this.findText(this.data, /[\n\r].*Using (.*) threads([^\n\r]*)/gm);
+    const text = this.findText(this.data, new RegExp('.*Using (.*) threads.*', 'gm'), 1);
     return text;
   }
 
   getPhaseStartTime(phase: number): any {
-    const text = this.findText(this.data, new RegExp(`/[\n\r].*Starting phase ${phase}\/4: .* ... \s*([^\n\r]*)/`, 'gm'));
+    const text = this.findText(this.data, new RegExp(`.*Starting phase 1\/4: .* tmp files.*?... (.*)`, 'gm'), 1);
+
+    if (!text) {
+      throw new Error('Could not parse date');
+    }
+
+    return moment(text, 'D HH:mm:ss YYYY').toDate();
+  }
+
+  getPhaseEndElapsed(phase: number): string {
+    const line = this.getPhaseEndEntry(phase);
+    const text = this.findText(line, new RegExp(`.* = (.*) seconds.*`, 'gm'), 1);
+
+    if (!text) {
+      throw new Error(`Seconds for Phase ${phase} could not be parsed`);
+    }
+
+    return Number(text).toFixed(2);
+  }
+
+  getPhaseEndCPU(phase: number): any {
+    const line = this.getPhaseEndEntry(phase);
+    const text = this.findText(line, new RegExp(".* CPU \((.*?)\) .*", 'gm'), 1) as string;
+
+    if (!text) {
+      throw new Error(`CPU usage for Phase ${phase} could not be parsed`);
+    }
+
+    return Number(text.replace('(', '').replace('%)', '')).toFixed(2);
+  }
+
+  getPhaseEndTime(phase: number): any {
+    const line = this.getPhaseEndEntry(phase);
+    const text = this.findText(line, new RegExp(`.* CPU \(.*?\) (.*)`, 'gm'), 2);
+
+    if (!text) {
+      throw new Error('Could not parse date');
+    }
+
+    return moment(text, 'ddd MMM D HH:mm:ss YYYY').toDate();
+  }
+
+  private getPhaseEndEntry(phase: number): any {
+    const text = this.findText(this.data, new RegExp(`.*Time for phase ${phase} = .*`, 'gm'), 0);
     return text;
   }
 
-  private findText(text: string, regex: RegExp) {
+  private findText(text: string, regex: RegExp, findIndex?: number) {
     try {
-      return Array.from(text.matchAll(regex))[0][1];
+      const regexExec = regex.exec(text) as RegExpExecArray;
+
+      if (findIndex === undefined) {
+        return regexExec;
+      }
+
+      return regexExec[findIndex];
     } catch (error) {
-      // console.error(error);
+      console.error(error);
       return null;
     }
   }

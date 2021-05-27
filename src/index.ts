@@ -47,22 +47,41 @@ app.get('/logs/full', (req: Request, res: Response) => {
       fileStats.size > 200000 ? fullLogs.push(fullPath) : false; // 200,000 is assumed a full log
     });
 
-    // console.log(files.length);
-    // console.log(fullLogs.length);
-
     const fileData = fs.readFileSync(fullLogs[fullLogs.length - 1], 'utf-8');
     console.log(fullLogs[fullLogs.length - 1]);
 
     const chiaLogReader = new ChiaLogReader(fileData);
-    console.log(chiaLogReader.getTempDirs());
-    console.log(chiaLogReader.getPlotSize());
-    console.log(chiaLogReader.getBufferSize());
-    console.log(chiaLogReader.getBuckets());
-    console.log(chiaLogReader.getThreads());
-    console.log(chiaLogReader.getPhaseStartTime(1));
-    console.log(chiaLogReader.getPhaseStartTime(2));
-    console.log(chiaLogReader.getPhaseStartTime(3));
-    console.log(chiaLogReader.getPhaseStartTime(4));
+
+    // Plot
+    console.log('Plot Temp Dirs: ', chiaLogReader.getTempDirs());
+    console.log('Plot Size: ', chiaLogReader.getPlotSize());
+    console.log('Plot Buffer Size: ', chiaLogReader.getBufferSize());
+    console.log('Plot Buckets: ', chiaLogReader.getBuckets());
+    console.log('Plot Threads: ', chiaLogReader.getThreads());
+
+    // Phase 1
+    console.log('Phase (1) Start Time: ', chiaLogReader.getPhaseStartTime(1));
+    console.log('Phase (1) Elapsed Time: ', chiaLogReader.getPhaseEndElapsed(1));
+    console.log('Phase (1) CPU Usage: ', chiaLogReader.getPhaseEndCPU(1));
+    console.log('Phase (1) End Time: ', chiaLogReader.getPhaseEndTime(1));
+
+    // Phase 2
+    console.log('Phase (2) Start Time: ', chiaLogReader.getPhaseStartTime(2));
+    console.log('Phase (2) Elapsed Time: ', chiaLogReader.getPhaseEndElapsed(2));
+    console.log('Phase (2) CPU Usage: ', chiaLogReader.getPhaseEndCPU(2));
+    console.log('Phase (2) End Time: ', chiaLogReader.getPhaseEndTime(2));
+
+    // // Phase 3
+    console.log('Phase (3) Start Time: ', chiaLogReader.getPhaseStartTime(3));
+    console.log('Phase (3) Elapsed Time: ', chiaLogReader.getPhaseEndElapsed(3));
+    console.log('Phase (3) CPU Usage: ', chiaLogReader.getPhaseEndCPU(3));
+    console.log('Phase (3) End Time: ', chiaLogReader.getPhaseEndTime(3));
+
+    // // Phase 4
+    console.log('Phase (4) Start Time: ', chiaLogReader.getPhaseStartTime(4));
+    console.log('Phase (4) Elapsed Time: ', chiaLogReader.getPhaseEndElapsed(4));
+    console.log('Phase (4) CPU Usage: ', chiaLogReader.getPhaseEndCPU(4));
+    console.log('Phase (4) End Time: ', chiaLogReader.getPhaseEndTime(4));
 
     res.send();
   } catch (error: any) {
