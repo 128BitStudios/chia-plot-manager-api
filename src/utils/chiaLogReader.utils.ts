@@ -7,7 +7,17 @@ export default class ChiaLogReader {
     this.data = data;
   }
 
-  getTempDirs() {
+  getPlotStartTime(): any {
+    const text = this.findText(this.data, new RegExp('(.*) chia', 'gm'), 1) as string;
+
+    if (!text) {
+      throw new Error('Could not parse date');
+    }
+
+    return moment(text, 'YYYY-MM-DDTHH:mm:ss.SSS').toISOString();
+  }
+
+  getTempDirs(): any[string] {
     const text = this.findText(this.data, new RegExp('.*Starting plotting progress into temporary dirs: (.*)', 'gm'), 1) as string;
     return text?.split(' and ');
   }
@@ -33,13 +43,13 @@ export default class ChiaLogReader {
   }
 
   getPhaseStartTime(phase: number): any {
-    const text = this.findText(this.data, new RegExp(`.*Starting phase 1\/4: .* tmp files.*?... (.*)`, 'gm'), 1);
+    const text = this.findText(this.data, new RegExp(`.*Starting phase ${phase}\/4: .* tmp files.*?... (.*)`, 'gm'), 1);
 
     if (!text) {
       throw new Error('Could not parse date');
     }
 
-    return moment(text, 'D HH:mm:ss YYYY').toDate();
+    return moment(text, 'D HH:mm:ss YYYY').toISOString();
   }
 
   getPhaseEndElapsed(phase: number): string {
@@ -72,7 +82,7 @@ export default class ChiaLogReader {
       throw new Error('Could not parse date');
     }
 
-    return moment(text, 'ddd MMM D HH:mm:ss YYYY').toDate();
+    return moment(text, 'ddd MMM D HH:mm:ss YYYY').toISOString();
   }
 
   private getPhaseEndEntry(phase: number): any {
@@ -90,7 +100,7 @@ export default class ChiaLogReader {
 
       return regexExec[findIndex];
     } catch (error) {
-      console.error(error);
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
       return null;
     }
   }

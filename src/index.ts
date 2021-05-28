@@ -1,9 +1,10 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express, Request, response, Response } from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import fs from 'fs';
-import ChiaLogReader from './utils/chiaLogReader';
+import ChiaLogReader from './utils/chiaLogReader.utils';
+import PlotService, { PlotDetails } from './services/plot.service';
 
 dotenv.config();
 
@@ -16,74 +17,65 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('<h1>Anybody there?!</h1>');
+app.get('/ping', (req: Request, res: Response) => {
+  res.send('Pong');
 });
 
-app.get('/webhook/ping', (req: Request, res: Response) => {
-  res.send('Pong!');
-});
-
-app.post('/webhook', (req: Request, res: Response) => {
+app.get('/plot/latest', (req: Request, res: Response) => {
   try {
-    const timestamp = `[${new Date().toISOString()}]`
-    const log = `${timestamp} ${req.body.content}`;
-    console.log(log);
-    fs.writeFileSync(`logs/main.log`, log + "\n", { flag: 'a', encoding: 'utf-8' });
+    const logs = PlotService.getAllLogs();
+    const logCount = logs.length;
+    const latestLog = logs[logCount - 10];
+
+    const plot = new PlotService(latestLog);
+    let plotDetails: any = {};
+
+    try {
+      plotDetails = plot.getPlotDetails();
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    try {
+      plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    try {
+      plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    try {
+      plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    try {
+      plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    res.send(plotDetails);
   } catch (error: any) {
     console.log(error);
     res.sendStatus(500);
   }
 });
 
-app.get('/logs/full', (req: Request, res: Response) => {
+app.get('/plot/latest/log', (req: Request, res: Response) => {
   try {
-    const files = fs.readdirSync(CHIA_LOGS);
-    const fullLogs: any = [];
+    const logs = PlotService.getAllLogs();
+    const logCount = logs.length;
+    const latestLog = logs[logCount - 1];
 
-    files.forEach((path) => {
-      const fullPath = `${CHIA_LOGS}/${path}`;
-      const fileStats = fs.statSync(fullPath);
-      fileStats.size > 200000 ? fullLogs.push(fullPath) : false; // 200,000 is assumed a full log
-    });
+    const plot = new PlotService(latestLog);
 
-    const fileData = fs.readFileSync(fullLogs[fullLogs.length - 1], 'utf-8');
-    console.log(fullLogs[fullLogs.length - 1]);
-
-    const chiaLogReader = new ChiaLogReader(fileData);
-
-    // Plot
-    console.log('Plot Temp Dirs: ', chiaLogReader.getTempDirs());
-    console.log('Plot Size: ', chiaLogReader.getPlotSize());
-    console.log('Plot Buffer Size: ', chiaLogReader.getBufferSize());
-    console.log('Plot Buckets: ', chiaLogReader.getBuckets());
-    console.log('Plot Threads: ', chiaLogReader.getThreads());
-
-    // Phase 1
-    console.log('Phase (1) Start Time: ', chiaLogReader.getPhaseStartTime(1));
-    console.log('Phase (1) Elapsed Time: ', chiaLogReader.getPhaseEndElapsed(1));
-    console.log('Phase (1) CPU Usage: ', chiaLogReader.getPhaseEndCPU(1));
-    console.log('Phase (1) End Time: ', chiaLogReader.getPhaseEndTime(1));
-
-    // Phase 2
-    console.log('Phase (2) Start Time: ', chiaLogReader.getPhaseStartTime(2));
-    console.log('Phase (2) Elapsed Time: ', chiaLogReader.getPhaseEndElapsed(2));
-    console.log('Phase (2) CPU Usage: ', chiaLogReader.getPhaseEndCPU(2));
-    console.log('Phase (2) End Time: ', chiaLogReader.getPhaseEndTime(2));
-
-    // // Phase 3
-    console.log('Phase (3) Start Time: ', chiaLogReader.getPhaseStartTime(3));
-    console.log('Phase (3) Elapsed Time: ', chiaLogReader.getPhaseEndElapsed(3));
-    console.log('Phase (3) CPU Usage: ', chiaLogReader.getPhaseEndCPU(3));
-    console.log('Phase (3) End Time: ', chiaLogReader.getPhaseEndTime(3));
-
-    // // Phase 4
-    console.log('Phase (4) Start Time: ', chiaLogReader.getPhaseStartTime(4));
-    console.log('Phase (4) Elapsed Time: ', chiaLogReader.getPhaseEndElapsed(4));
-    console.log('Phase (4) CPU Usage: ', chiaLogReader.getPhaseEndCPU(4));
-    console.log('Phase (4) End Time: ', chiaLogReader.getPhaseEndTime(4));
-
-    res.send();
+    res.send(plot.data);
   } catch (error: any) {
     console.log(error);
     res.sendStatus(500);
