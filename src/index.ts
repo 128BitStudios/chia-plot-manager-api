@@ -21,11 +21,71 @@ app.get('/ping', (req: Request, res: Response) => {
   res.send('Pong');
 });
 
+app.get('/version', (req: Request, res: Response) => {
+  return '0.0.1';
+});
+
+app.get('/plot/all', (req: Request, res: Response) => {
+  try {
+    const logs = PlotService.getAllLogs();
+    const logCount = logs.length;
+    const plots: ChiaLogReader[] = [];
+
+    logs.forEach((log) => {
+      const plot = new PlotService(log);
+      let plotDetails: any = {};
+
+      try {
+        plotDetails = plot.getPlotDetails();
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      plots.push(plotDetails);
+    });
+
+    res.send({
+      data: {
+        plots,
+        count: logCount,
+      }
+    });
+  }
+  catch (error: any) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 app.get('/plot/latest', (req: Request, res: Response) => {
   try {
     const logs = PlotService.getAllLogs();
     const logCount = logs.length;
-    const latestLog = logs[logCount - 10];
+    const latestLog = logs[logCount - 1];
 
     const plot = new PlotService(latestLog);
     let plotDetails: any = {};
@@ -60,7 +120,67 @@ app.get('/plot/latest', (req: Request, res: Response) => {
       process.env?.DEBUG == 'true' ? console.error(error) : false;
     }
 
-    res.send(plotDetails);
+    res.send({
+      data: {
+        plot: plotDetails,
+      }
+    });
+  } catch (error: any) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/plot/index/:index', (req: Request, res: Response) => {
+  const index: number = Number(req.params.index);
+
+  if (!index) {
+    res.statusMessage = JSON.stringify({ error: 'No index number provided in URL' });
+    res.status(400).end();
+  }
+
+  try {
+    const logs = PlotService.getAllLogs();
+    const selectedLog = logs[index];
+
+    const plot = new PlotService(selectedLog);
+    let plotDetails: any = {};
+
+    try {
+      plotDetails = plot.getPlotDetails();
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    try {
+      plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    try {
+      plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    try {
+      plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    try {
+      plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
+    } catch (error) {
+      process.env?.DEBUG == 'true' ? console.error(error) : false;
+    }
+
+    res.send({
+      data: {
+        plot: plotDetails,
+      }
+    });
   } catch (error: any) {
     console.log(error);
     res.sendStatus(500);
@@ -74,8 +194,13 @@ app.get('/plot/latest/log', (req: Request, res: Response) => {
     const latestLog = logs[logCount - 1];
 
     const plot = new PlotService(latestLog);
+    const log = plot.getLog();
 
-    res.send(plot.data);
+    res.send({
+      data: {
+        log,
+      }
+    });
   } catch (error: any) {
     console.log(error);
     res.sendStatus(500);

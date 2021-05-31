@@ -3,8 +3,9 @@ import moment from 'moment';
 import ChiaLogReader from '../utils/chiaLogReader.utils';
 
 export interface PlotDetails {
+  filename: string;
   startTime: string;
-  elapsedTime: string;
+  elapsedTime?: string;
   tempDirs: string[];
   size: number;
   memory: string;
@@ -28,10 +29,15 @@ export default class PlotService {
     this.data = data;
   }
 
+  public getLog(): string {
+    return this.data.getLog();
+  }
+
   public getPlotDetails(): PlotDetails {
     return {
+      filename: this.data.getLogFilename(),
       startTime: this.data.getPlotStartTime(),
-      elapsedTime: moment(this.data.getPlotStartTime()).diff(moment(new Date())).toString(),
+      // elapsedTime: moment(this.data.getPlotStartTime()).diff(moment(new Date())).toString(),
       tempDirs: this.data.getTempDirs(),
       size: this.data.getPlotSize(),
       memory: this.data.getBufferSize(),
@@ -54,7 +60,7 @@ export default class PlotService {
   public static getLog(filename: string): ChiaLogReader {
     const fullPath = `${process.env.CHIA_LOGS}/${filename}`;
     const fileData = fs.readFileSync(fullPath, 'utf-8');
-    const chiaLogReader = new ChiaLogReader(fileData);
+    const chiaLogReader = new ChiaLogReader(filename, fileData);
 
     return chiaLogReader;
   }

@@ -1,10 +1,20 @@
 import moment from 'moment';
 
 export default class ChiaLogReader {
+  public filename: string;
   public data: string;
 
-  constructor(data: string) {
+  constructor(filename: string, data: string) {
     this.data = data;
+    this.filename = filename;
+  }
+
+  getLog(): string {
+    return this.data;
+  }
+
+  getLogFilename(): string {
+    return this.filename;
   }
 
   getPlotStartTime(): any {
@@ -43,7 +53,12 @@ export default class ChiaLogReader {
   }
 
   getPhaseStartTime(phase: number): any {
-    const text = this.findText(this.data, new RegExp(`.*Starting phase ${phase}\/4: .* tmp files.*?... (.*)`, 'gm'), 1);
+    let text = this.findText(this.data, new RegExp(`.*Starting phase ${phase}\/4:.*... (.*)`, 'gm'), 0) as string;
+
+    if (text && text.indexOf('...') >= 0) {
+      const textSplit = text.split('... ');
+      text = textSplit[1];
+    }
 
     if (!text) {
       throw new Error('Could not parse date');
