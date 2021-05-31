@@ -64,11 +64,8 @@ export default class PlotService {
     const logs: ChiaLogReader[] = [];
 
     files.forEach((filename) => {
-      const fullPath = `${process.env.CHIA_LOGS}/${filename}`;
-      const fileData = fs.readFileSync(fullPath, 'utf-8');
-      const chiaLogReader = new ChiaLogReader(fileData);
-
-      logs.push(chiaLogReader);
+      const log = PlotService.getLog(filename);
+      logs.push(log);
     });
 
     return logs;
