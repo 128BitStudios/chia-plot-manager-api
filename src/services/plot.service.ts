@@ -1,5 +1,4 @@
 import fs from 'fs';
-import moment from 'moment';
 import ChiaLogReader from '../utils/chiaLogReader.utils';
 
 export interface PlotDetails {

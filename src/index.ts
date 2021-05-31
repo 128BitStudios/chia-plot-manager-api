@@ -1,16 +1,13 @@
-import express, { Express, Request, response, Response } from 'express';
 import bodyParser from 'body-parser';
-import helmet from 'helmet';
 import dotenv from 'dotenv';
-import fs from 'fs';
+import express, { Express, Request, Response } from 'express';
+import helmet from 'helmet';
+import PlotService from './services/plot.service';
 import ChiaLogReader from './utils/chiaLogReader.utils';
-import PlotService, { PlotDetails } from './services/plot.service';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
-const CHIA_LOGS = process.env.CHIA_LOGS || '/chia-logs';
-
 const app: Express = express();
 
 app.use(helmet());
