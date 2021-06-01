@@ -196,4 +196,28 @@ app.get('/plot/latest/log', (req: Request, res: Response) => {
   }
 });
 
+app.get('/plot/index/:index/log', (req: Request, res: Response) => {
+  const index: number = Number(req.params.index);
+
+  if (!index) {
+    res.statusMessage = JSON.stringify({ error: 'No index number provided in URL' });
+    res.status(400).end();
+  }
+
+  try {
+    const logs = PlotService.getAllLogs();
+    const logByIndex = logs[index];
+
+    const plot = new PlotService(logByIndex);
+    const log = plot.getLog();
+
+    res.send({
+      data: log,
+    });
+  } catch (error: any) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 app.listen(PORT, () => console.log(`Running on ${PORT} ⚡`));
