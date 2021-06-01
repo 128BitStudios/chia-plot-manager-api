@@ -15,11 +15,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/ping', (req: Request, res: Response) => {
-  res.send('Pong');
+  res.send({ data: 'Pong' })
 });
 
 app.get('/version', (req: Request, res: Response) => {
-  return '0.0.1';
+  res.send({ data: '0.0.1' })
 });
 
 app.get('/plot/all', (req: Request, res: Response) => {
@@ -66,10 +66,8 @@ app.get('/plot/all', (req: Request, res: Response) => {
     });
 
     res.send({
-      data: {
-        plots,
-        count: logCount,
-      }
+      data: plots,
+      count: logCount,
     });
   }
   catch (error: any) {
@@ -118,9 +116,7 @@ app.get('/plot/latest', (req: Request, res: Response) => {
     }
 
     res.send({
-      data: {
-        plot: plotDetails,
-      }
+      data: plotDetails,
     });
   } catch (error: any) {
     console.log(error);
@@ -174,9 +170,7 @@ app.get('/plot/index/:index', (req: Request, res: Response) => {
     }
 
     res.send({
-      data: {
-        plot: plotDetails,
-      }
+      data: plotDetails,
     });
   } catch (error: any) {
     console.log(error);
@@ -194,9 +188,7 @@ app.get('/plot/latest/log', (req: Request, res: Response) => {
     const log = plot.getLog();
 
     res.send({
-      data: {
-        log,
-      }
+      data: log,
     });
   } catch (error: any) {
     console.log(error);

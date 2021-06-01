@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+  cpm-api:
+    container_name: cpm-api
+    environment:
+      - PORT=3000
+      - CHIA_LOGS=/Volumes/chialogs
+      - NODE_ENV=local
+      - DEBUG=false
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - cpm-network
+
+networks:
+  cpm-network:
+    name: cpm-network
