@@ -1,7 +1,7 @@
 {
-  "name": "node-express-typescript",
-  "version": "1.0.0",
-  "description": "Node.js setup with Express and TypeScript",
+  "name": "chia-plot-manager-api",
+  "version": "0.0.1",
+  "description": "Chia Log Reader and Node API",
   "main": "dist/index.js",
   "scripts": {
     "build": "rimraf dist && tsc",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ultimatecourses/node-express-typescript.git"
+    "url": "git+https://github.com/128BitStudios/chia-plot-manager-api.git"
   },
-  "author": "ultimatecourses",
+  "author": "128bitstudios",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ultimatecourses/node-express-typescript/issues"
+    "url": "https://github.com/128BitStudios/chia-plot-manager-api/issues"
   },
-  "homepage": "https://github.com/ultimatecourses/node-express-typescript#readme",
+  "homepage": "https://github.com/128BitStudios/chia-plot-manager-api.git#readme",
   "dependencies": {
     "@types/body-parser": "^1.19.0",
     "@types/express": "^4.17.11",
