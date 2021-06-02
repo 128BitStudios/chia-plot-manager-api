@@ -2,7 +2,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import express, { Express, Request, Response } from 'express';
 import helmet from 'helmet';
-import PlotService from './services/plot.service';
+import PlotService, { PlotDetails } from './services/plot.service';
 import ChiaLogReader from './utils/chiaLogReader.utils';
 
 dotenv.config();
@@ -26,11 +26,13 @@ app.get('/plot/all', (req: Request, res: Response) => {
   try {
     const logs = PlotService.getAllLogs();
     const logCount = logs.length;
-    const plots: ChiaLogReader[] = [];
+    const plots: PlotDetails[] = [];
 
-    logs.forEach((log) => {
+    logs.forEach((log, index) => {
       const plot = new PlotService(log);
       let plotDetails: any = {};
+
+      console.log(index);
 
       try {
         plotDetails = plot.getPlotDetails();
@@ -117,6 +119,126 @@ app.get('/plot/latest', (req: Request, res: Response) => {
 
     res.send({
       data: plotDetails,
+    });
+  } catch (error: any) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/plot/running', (req: Request, res: Response) => {
+  try {
+    const logs = PlotService.getAllLogs();
+    let logCount = logs.length;
+    const plots: PlotDetails[] = [];
+
+    logs.forEach((log) => {
+      const plot = new PlotService(log);
+      let plotDetails: any = {};
+
+      if (plot.plotIsFinished()) {
+        return;
+      }
+
+      try {
+        plotDetails = plot.getPlotDetails();
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      plots.push(plotDetails);
+    });
+
+    plots.filter((plot) => plot.phases.length <= 3);
+    logCount = plots.length;
+
+    res.send({
+      data: plots,
+      count: logCount,
+    });
+  } catch (error: any) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/plot/completed', (req: Request, res: Response) => {
+  try {
+    const logs = PlotService.getAllLogs();
+    let logCount = logs.length;
+    const plots: PlotDetails[] = [];
+
+    logs.forEach((log) => {
+      const plot = new PlotService(log);
+      let plotDetails: any = {};
+
+      if (!plot.plotIsFinished()) {
+        return;
+      }
+
+      try {
+        plotDetails = plot.getPlotDetails();
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      try {
+        plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
+      } catch (error) {
+        process.env?.DEBUG == 'true' ? console.error(error) : false;
+      }
+
+      plots.push(plotDetails);
+    });
+
+    plots.filter((plot) => plot.phases.length === 4);
+    logCount = plots.length;
+
+    res.send({
+      data: plots,
+      count: logCount,
     });
   } catch (error: any) {
     console.log(error);

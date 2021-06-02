@@ -56,6 +56,16 @@ export default class PlotService {
     };
   }
 
+  public plotIsFinished() {
+    try {
+      this.data.getPhaseEndTime(4)
+    } catch (error) {
+      return false;
+    }
+
+    return true;
+  }
+
   public static getLog(filename: string): ChiaLogReader {
     const fullPath = `${process.env.CHIA_LOGS}/${filename}`;
     const fileData = fs.readFileSync(fullPath, 'utf-8');
