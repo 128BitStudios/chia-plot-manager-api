@@ -254,19 +254,18 @@ app.get('/plot/completed', (req: Request, res: Response) => {
   }
 });
 
-app.get('/plot/index/:index', (req: Request, res: Response) => {
-  const index: number = Number(req.params.index);
+app.get('/plot/filename/:filename', (req: Request, res: Response) => {
+  const filename: string = req.params.filename;
 
-  if (!index) {
-    res.statusMessage = JSON.stringify({ error: 'No index number provided in URL' });
+  if (!filename) {
+    res.statusMessage = JSON.stringify({ error: 'No filename provided in URL' });
     res.status(400).end();
   }
 
   try {
-    const logs = PlotService.getAllLogs();
-    const selectedLog = logs[index];
+    const log = PlotService.getLog(filename);
 
-    const plot = new PlotService(selectedLog);
+    const plot = new PlotService(log);
     let plotDetails: any = {};
 
     try {
@@ -326,23 +325,22 @@ app.get('/plot/latest/log', (req: Request, res: Response) => {
   }
 });
 
-app.get('/plot/index/:index/log', (req: Request, res: Response) => {
-  const index: number = Number(req.params.index);
+app.get('/plot/filename/:filename/log', (req: Request, res: Response) => {
+  const filename: string = req.params.filename;
 
-  if (!index) {
-    res.statusMessage = JSON.stringify({ error: 'No index number provided in URL' });
+  if (!filename) {
+    res.statusMessage = JSON.stringify({ error: 'No filename provided in URL' });
     res.status(400).end();
   }
 
   try {
-    const logs = PlotService.getAllLogs();
-    const logByIndex = logs[index];
+    const log = PlotService.getLog(filename);
 
-    const plot = new PlotService(logByIndex);
-    const log = plot.getLog();
+    const plot = new PlotService(log);
+    const logText = plot.getLog();
 
     res.send({
-      data: log,
+      data: logText,
     });
   } catch (error: any) {
     console.log(error);
