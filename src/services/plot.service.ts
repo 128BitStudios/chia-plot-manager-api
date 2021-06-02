@@ -56,7 +56,7 @@ export default class PlotService {
     };
   }
 
-  public plotIsFinished() {
+  public plotIsFinished(): boolean {
     try {
       this.data.getPhaseEndTime(4)
     } catch (error) {
@@ -64,6 +64,14 @@ export default class PlotService {
     }
 
     return true;
+  }
+
+  public plotHasProblems(): boolean {
+    if (!this.data.getPlotSize()) {
+      return true;
+    }
+
+    return false;
   }
 
   public static getLog(filename: string): ChiaLogReader {

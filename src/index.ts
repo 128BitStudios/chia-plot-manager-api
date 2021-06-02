@@ -136,6 +136,10 @@ app.get('/plot/running', (req: Request, res: Response) => {
       const plot = new PlotService(log);
       let plotDetails: any = {};
 
+      if (plot.plotHasProblems()) {
+        return;
+      }
+
       if (plot.plotIsFinished()) {
         return;
       }
@@ -160,6 +164,8 @@ app.get('/plot/running', (req: Request, res: Response) => {
 
       try {
         plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
+
+        console.log(plot.getPlotPhaseDetails(3));
       } catch (error) {
         process.env?.DEBUG == 'true' ? console.error(error) : false;
       }
@@ -173,7 +179,6 @@ app.get('/plot/running', (req: Request, res: Response) => {
       plots.push(plotDetails);
     });
 
-    plots.filter((plot) => plot.phases.length <= 3);
     logCount = plots.length;
 
     res.send({
@@ -195,6 +200,10 @@ app.get('/plot/completed', (req: Request, res: Response) => {
     logs.forEach((log) => {
       const plot = new PlotService(log);
       let plotDetails: any = {};
+
+      if (plot.plotHasProblems()) {
+        return;
+      }
 
       if (!plot.plotIsFinished()) {
         return;
@@ -233,7 +242,6 @@ app.get('/plot/completed', (req: Request, res: Response) => {
       plots.push(plotDetails);
     });
 
-    plots.filter((plot) => plot.phases.length === 4);
     logCount = plots.length;
 
     res.send({
