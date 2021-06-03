@@ -10,7 +10,7 @@
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "npm run docker-build && npm run docker-deploy && kubectl -n apis rollout restart deploy cpm-app",
+    "deploy": "npm run docker-build && npm run docker-deploy && kubectl -n apis rollout restart deploy cpm-api",
     "docker-build": "sh scripts/build.sh",
     "docker-deploy": "sh scripts/deploy.sh"
   },
