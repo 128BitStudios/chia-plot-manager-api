@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build -t cpm -f Dockerfile .
+docker build -t cpm -f Dockerfile.production .
