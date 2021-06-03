@@ -14,6 +14,10 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/', (req: Request, res: Response) => {
+  res.send({ data: 'Pong' })
+});
+
 app.get('/ping', (req: Request, res: Response) => {
   res.send({ data: 'Pong' })
 });
