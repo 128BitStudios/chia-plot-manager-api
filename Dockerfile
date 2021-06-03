@@ -12,4 +12,4 @@ RUN npm ci
 EXPOSE 3000
 
 # Development only
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "serve"]

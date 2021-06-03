@@ -9,12 +9,12 @@ services:
       - NODE_ENV=local
       - DEBUG=false
     volumes:
-      - ./test/mock-logs:/chialogs
+      - ./test/mock-logs:/chialogs # change ./test/mock-logs to your local chia folder
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 3000:3000 # change first number to any port you wish to use on your system
     networks:
       - cpm-network
 

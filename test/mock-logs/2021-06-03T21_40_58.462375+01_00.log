@@ -1,0 +1,125 @@
+2021-06-03T21:41:00.128  chia.plotting.create_plots       : [32mINFO    [0m Creating 1 plots of size 32, pool public key:  80c0bee80fc1fcdb540d9680168c6faa7ec2be3baa8c270832dbf15ad8c7e9a5b184fe0b3afb96584c9ebca6e29506f5 farmer public key: a9a7a1d54defa5e2a4ed12c366828761d12fec97d5c48720fddaab1be39be7f5ca010c0117638a7146eb48a18c599d79[0m
+2021-06-03T21:41:00.134  chia.plotting.create_plots       : [32mINFO    [0m Memo: 80c0bee80fc1fcdb540d9680168c6faa7ec2be3baa8c270832dbf15ad8c7e9a5b184fe0b3afb96584c9ebca6e29506f5a9a7a1d54defa5e2a4ed12c366828761d12fec97d5c48720fddaab1be39be7f5ca010c0117638a7146eb48a18c599d79225031353a4c37499acaf662773f61d34bfc7c375c15b321a660d95f36be7e92[0m
+2021-06-03T21:41:00.134  chia.plotting.create_plots       : [32mINFO    [0m Starting plot 1/1[0m
+
+Starting plotting progress into temporary dirs: /mnt/2fcraid0/chia and /mnt/2fcraid0/chia
+ID: 4f28789c4eca89d74f28d888d6ff84230cc48935a968071dddfb2ad13a18bd29
+Plot size is: 32
+Buffer size is: 3800MiB
+Using 128 buckets
+Using 4 threads of stripe size 65536
+
+Starting phase 1/4: Forward Propagation into tmp files... Thu Jun  3 21:41:00 2021
+Computing table 1
+F1 complete, time: 133.327 seconds. CPU (125.17%) Thu Jun  3 21:43:13 2021
+Computing table 2
+	Bucket 0 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 1 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 2 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 3 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 4 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 5 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 6 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 7 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 8 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 9 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 10 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 11 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 12 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 13 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 14 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 15 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 16 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 17 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 18 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 19 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 20 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 21 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 22 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 23 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 24 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 25 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 26 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 27 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 28 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 29 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 30 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 31 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 32 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 33 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 34 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 35 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 36 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 37 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 38 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 39 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 40 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 41 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 42 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 43 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 44 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 45 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 46 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 47 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 48 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 49 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 50 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 51 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 52 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 53 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 54 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 55 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 56 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 57 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 58 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 59 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 60 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 61 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 62 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 63 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 64 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 65 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 66 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 67 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 68 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 69 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 70 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 71 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 72 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 73 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 74 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 75 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 76 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 77 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 78 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 79 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 80 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 81 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 82 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 83 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 84 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 85 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 86 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 87 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 88 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 89 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 90 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 91 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 92 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 93 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 94 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 95 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 96 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 97 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 98 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 99 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 100 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 101 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 102 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 103 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 104 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 105 uniform sort. Ram: 3.645GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 106 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 107 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 108 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 109 uniform sort. Ram: 3.645GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.

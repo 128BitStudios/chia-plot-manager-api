@@ -29,7 +29,12 @@ export default class ChiaLogReader {
 
   getTempDirs(): any[string] {
     const text = this.findText(this.data, new RegExp('.*Starting plotting progress into temporary dirs: (.*)', 'gm'), 1) as string;
-    return text?.split(' and ');
+
+    if (!text) {
+      return null;
+    }
+
+    return text.split(' and ');
   }
 
   getPlotSize(): any {
@@ -115,7 +120,7 @@ export default class ChiaLogReader {
 
       return regexExec[findIndex];
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
       return null;
     }
   }

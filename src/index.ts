@@ -32,36 +32,34 @@ app.get('/plot/all', (req: Request, res: Response) => {
       const plot = new PlotService(log);
       let plotDetails: any = {};
 
-      console.log(index);
-
       try {
         plotDetails = plot.getPlotDetails();
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       plots.push(plotDetails);
@@ -90,31 +88,31 @@ app.get('/plot/latest', (req: Request, res: Response) => {
     try {
       plotDetails = plot.getPlotDetails();
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     try {
       plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     try {
       plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     try {
       plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     try {
       plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     res.send({
@@ -147,33 +145,31 @@ app.get('/plot/running', (req: Request, res: Response) => {
       try {
         plotDetails = plot.getPlotDetails();
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
-
-        console.log(plot.getPlotPhaseDetails(3));
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       plots.push(plotDetails);
@@ -212,31 +208,31 @@ app.get('/plot/completed', (req: Request, res: Response) => {
       try {
         plotDetails = plot.getPlotDetails();
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       try {
         plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
       } catch (error) {
-        process.env?.DEBUG == 'true' ? console.error(error) : false;
+        process.env.DEBUG == 'true' ? console.error(error) : false;
       }
 
       plots.push(plotDetails);
@@ -271,31 +267,31 @@ app.get('/plot/filename/:filename', (req: Request, res: Response) => {
     try {
       plotDetails = plot.getPlotDetails();
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     try {
       plotDetails.phases[0] = plot.getPlotPhaseDetails(1);
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     try {
       plotDetails.phases[1] = plot.getPlotPhaseDetails(2);
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     try {
       plotDetails.phases[2] = plot.getPlotPhaseDetails(3);
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     try {
       plotDetails.phases[3] = plot.getPlotPhaseDetails(4);
     } catch (error) {
-      process.env?.DEBUG == 'true' ? console.error(error) : false;
+      process.env.DEBUG == 'true' ? console.error(error) : false;
     }
 
     res.send({
