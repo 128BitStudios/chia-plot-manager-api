@@ -9,7 +9,10 @@
     "serve": "cross-env PORT=3000 NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q dist/index.js\"",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npm run docker-build && npm run docker-deploy && kubectl -n apis rollout restart deploy cpm-app",
+    "docker-build": "sh scripts/build.sh",
+    "docker-deploy": "sh scripts/deploy.sh"
   },
   "repository": {
     "type": "git",
