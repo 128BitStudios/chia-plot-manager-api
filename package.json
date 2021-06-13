@@ -8,7 +8,7 @@
     "preserve": "npm run build",
     "serve": "cross-env PORT=3000 NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q build/index.js\"",
     "prestart": "npm run build",
-    "start": "cross-env NODE_ENV=production node build/index.js",
+    "start": "node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "npm run docker-build && npm run docker-deploy && kubectl -n apis rollout restart deploy cpm-api",
     "docker-build": "sh scripts/build.sh",
