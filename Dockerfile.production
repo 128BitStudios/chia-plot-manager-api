@@ -12,12 +12,12 @@ RUN npm ci
 EXPOSE 3000
 
 # Production only
-RUN npm run prestart
-FROM nginx:stable-alpine
-COPY --from=build /var/app/build /var/share/nginx/html
-COPY --from=build /var/app/scripts/entrypoint.sh /var/share/nginx
-COPY --from=build /usr/local/bin/node /bin
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-CMD ["nginx", "-g", "daemon off;"]
+# RUN npm run prestart
+# FROM nginx:stable-alpine
+# COPY --from=build /var/app/build /var/share/nginx/html
+# COPY --from=build /var/app/scripts/entrypoint.sh /var/share/nginx
+# COPY --from=build /usr/local/bin/node /bin
+# COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# CMD ["nginx", "-g", "daemon off;"]
 # CMD ["/bin/sh", "/var/share/nginx/entrypoint.sh"]
-# CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start"]
